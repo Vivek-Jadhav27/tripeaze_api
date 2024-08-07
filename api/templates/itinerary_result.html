@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Itinerary for {{ city }} - {{ num_days }} Days</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        h1 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .day-plan {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 0;
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .info-section {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Itinerary for {{ city }} - {{ num_days }} Days</h1>
+        {% for day_plan in itinerary %}
+            <div class="day-plan">
+                <h2>Day {{ day_plan.day }}</h2>
+                <div class="info-section">
+                    <p><strong>Hotel:</strong> 
+                        <a href="{{ day_plan.hotel.url }}" target="_blank">{{ day_plan.hotel.name }} ({{ day_plan.hotel.rating }} stars) - {{ day_plan.hotel.address }}</a>
+                    </p>
+                    <p><strong>Breakfast:</strong> 
+                        <a href="{{ day_plan.breakfast.url }}" target="_blank">{{ day_plan.breakfast.name }} ({{ day_plan.breakfast.rating }} stars) - {{ day_plan.breakfast.location }}</a></p>
+                    <p><strong>Morning Activity:</strong> 
+                        <a href="{{ day_plan.morning_activity.url }}" target="_blank">{{ day_plan.morning_activity.name }} ({{ day_plan.morning_activity.type }})</a>
+                    </p>
+                    <p><strong>Lunch:</strong> 
+                        <a href="{{ day_plan.lunch.url }}" target="_blank">{{ day_plan.lunch.name }} ({{ day_plan.lunch.rating }} stars) - {{ day_plan.lunch.location }}</a></p>
+                    <p><strong>Afternoon Activity:</strong> 
+                        <a href="{{ day_plan.afternoon_activity.url }}" target="_blank">{{ day_plan.afternoon_activity.name }} ({{ day_plan.afternoon_activity.type }})</a>
+                    </p>
+                    <p><strong>Dinner:</strong> <a href="{{ day_plan.dinner.url }}" target="_blank">{{ day_plan.dinner.name }} ({{ day_plan.dinner.rating }} stars) - {{ day_plan.dinner.location }}</a></p>
+                </div>
+            </div>
+        {% endfor %}
+        <a href="{% url 'itinerary_view' %}">Back to Form</a>
+    </div>
+</body>
+</html>
